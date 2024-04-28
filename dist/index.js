@@ -24926,11 +24926,11 @@ exports.uploadWechatMiniProgram = void 0;
 const node_path_1 = __nccwpck_require__(9411);
 async function uploadWechatMiniProgram({ root, version, description, privateKey }) {
     console.log('[uploadWechatMiniProgram]', root, version, description, privateKey);
-    const workspace = process.env.GITHUB_WORKSPACE || '';
-    console.log('[uploadWechatMiniProgram#workspace]', workspace);
-    const projectPath = (0, node_path_1.join)(workspace, root);
-    console.log('[uploadWechatMiniProgram#projectPath]', projectPath, (0, node_path_1.resolve)(workspace, root));
-    const projectConfigPath = (0, node_path_1.join)(projectPath, 'project.config.json');
+    // const workspace = process.env.GITHUB_WORKSPACE || '';
+    // console.log('[uploadWechatMiniProgram#workspace]', workspace);
+    // const projectPath = join(workspace, root);
+    console.log('[uploadWechatMiniProgram#projectPath]', root);
+    const projectConfigPath = (0, node_path_1.join)(root, 'project.config.json');
     console.log(`[uploadWechatMiniProgram#projectConfigPath]`, projectConfigPath);
     //
     // if (!existsSync(projectConfigPath)) {
