@@ -12,7 +12,8 @@ export interface UploadProps {
 
 export async function uploadWechatMiniProgram({ root, version, description, privateKey }: UploadProps): Promise<void> {
   console.log('[uploadWechatMiniProgram]', root, version, description, privateKey);
-  const projectPath = join(process.env.GITHUB_WORKSPACE ?? '', root);
+  const workspace = process.env.GITHUB_WORKSPACE || '';
+  const projectPath = join(workspace, root);
   const projectConfigPath = join(projectPath, 'project.config.json');
   console.log(`[uploadWechatMiniProgram#projectConfigPath]`, projectConfigPath);
   //

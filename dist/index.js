@@ -24926,7 +24926,8 @@ exports.uploadWechatMiniProgram = void 0;
 const node_path_1 = __nccwpck_require__(9411);
 async function uploadWechatMiniProgram({ root, version, description, privateKey }) {
     console.log('[uploadWechatMiniProgram]', root, version, description, privateKey);
-    const projectPath = (0, node_path_1.join)(process.env.GITHUB_WORKSPACE ?? '', root);
+    const workspace = process.env.GITHUB_WORKSPACE || '';
+    const projectPath = (0, node_path_1.join)(workspace, root);
     const projectConfigPath = (0, node_path_1.join)(projectPath, 'project.config.json');
     console.log(`[uploadWechatMiniProgram#projectConfigPath]`, projectConfigPath);
     //
