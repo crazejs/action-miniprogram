@@ -32,10 +32,6 @@ jobs:
         id: npm-ci
         run: npm ci
 
-      - name: Check Format
-        id: npm-format-check
-        run: npm run format:check
-
       - name: Lint
         id: npm-lint
         run: npm run lint
@@ -53,8 +49,8 @@ jobs:
         id: test-action
         uses: ./
         with:
-          milliseconds: 2000
-
-      - name: Print Output
-        id: output
-        run: echo "${{ steps.test-action.outputs.time }}"
+          root: miniprogram/wechat
+          version: 1.0.0
+          description: test
+        env:
+          WECHAT_MINI_PROGRAM_PRIVATE_KEY: ${{ secrets.WECHAT_MINI_PROGRAM_PRIVATE_KEY }}

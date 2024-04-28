@@ -1,5 +1,5 @@
-import { getInput, setFailed } from '@actions/core';
-import { uploadWechatMiniProgram } from './wechat';
+import { getInput, setFailed, debug } from '@actions/core';
+// import { uploadWechatMiniProgram } from './wechat';
 
 (async function run(): Promise<void> {
   try {
@@ -7,12 +7,14 @@ import { uploadWechatMiniProgram } from './wechat';
     const version: string = getInput('version');
     const description: string = getInput('description');
 
-    await uploadWechatMiniProgram({
-      root,
-      version,
-      description,
-      privateKey: process.env.WECHAT_MINI_PROGRAM_PRIVATE_KEY ?? '',
-    });
+    console.log('[run]', root, version, description);
+    debug(`[run]:${root}_${version}_${description}`);
+    // await uploadWechatMiniProgram({
+    //   root,
+    //   version,
+    //   description,
+    //   privateKey: process.env.WECHAT_MINI_PROGRAM_PRIVATE_KEY ?? '',
+    // });
   } catch (error) {
     if (error instanceof Error) {
       setFailed(error.message);
