@@ -24,7 +24,7 @@
   },
   "scripts": {
     "bundle": "pnpm lint && pnpm build",
-    "lint": "eslint .",
+    "lint": "eslint . --fix",
     "build": "ncc build src/index.ts -o dist --source-map --license licenses.txt",
     "start": "pnpm build -- --watch",
     "prepare": "husky || true",
