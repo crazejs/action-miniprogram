@@ -18,31 +18,27 @@ jobs:
 
     steps:
       - name: Checkout
-        id: checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        id: setup-node
+      - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version-file: .node-version
-          cache: npm
+          node-version: 20
 
-      - name: Install Dependencies
-        id: npm-ci
-        run: npm ci
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8
+          run_install: false
+
+      - name: Install deps
+        run: pnpm install
 
       - name: Check Format
-        id: npm-format-check
-        run: npm run format:check
+        run: pnpm format:check
 
       - name: Lint
-        id: npm-lint
-        run: npm run lint
-
-      - name: Test
-        id: npm-ci-test
-        run: npm run ci-test
+        run: pnpm lint
 
   test-action:
     name: GitHub Actions Test
@@ -55,10 +51,43 @@ jobs:
 
       - name: Test Local Action
         id: test-action
-        uses: ./
+        uses: ./miniprogram/wechat
         with:
-          milliseconds: 2000
+          root: .
+          version: 1.0.0
+          description: test
 
       - name: Print Output
         id: output
-        run: echo "${{ steps.test-action.outputs.time }}"
+        run: echo "${{ steps.test-action.outputs.version }}"
+
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: writ
+      pull-requests: write
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      #      - name: Install Node.js
+      #        uses: actions/setup-node@v4
+      #        with:
+      #          node-version: 20
+      #
+      #      - name: Install pnpm
+      #        uses: pnpm/action-setup@v3
+      #        with:
+      #          version: 8
+      #          run_install: false
+      #
+      #      - name: Install deps
+      #        run: pnpm install
+
+      - name: Release
+        run: pnpm release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

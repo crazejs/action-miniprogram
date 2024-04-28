@@ -1,7 +1,23 @@
-/**
- * The entrypoint for the action.
- */
-import { run } from './main'
+import { getInput, setOutput, setFailed } from '@actions/core';
+import { uploadWechatMiniProgram } from './wechat';
 
-// eslint-disable-next-line @typescript-eslint/no-floating-promises
-run()
+(async function run(): Promise<void> {
+  try {
+    const root: string = getInput('root');
+    const version: string = getInput('version');
+    const description: string = getInput('description');
+
+    await uploadWechatMiniProgram({
+      root,
+      version,
+      description,
+      privateKey: process.env.WECHAT_MINI_PROGRAM_PRIVATE_KEY ?? '',
+    });
+
+    setOutput('version', version);
+  } catch (error) {
+    if (error instanceof Error) {
+      setFailed(error.message);
+    }
+  }
+})();

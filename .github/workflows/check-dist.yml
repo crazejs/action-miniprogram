@@ -30,20 +30,23 @@ jobs:
         id: checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        id: setup-node
+      - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version-file: .node-version
-          cache: npm
+          node-version: 20
 
-      - name: Install Dependencies
-        id: install
-        run: npm ci
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8
+          run_install: false
+
+      - name: Install deps
+        run: pnpm install
 
       - name: Build dist/ Directory
         id: build
-        run: npm run bundle
+        run: pnpm bundle
 
       # This will fail the workflow if the `dist/` directory is different than
       # expected.
@@ -56,7 +59,7 @@ jobs:
             exit 1
           fi
 
-      # If `dist/` was different than expected, upload the expected version as a
+      # If `dist/` was different from expected, upload the expected version as a
       # workflow artifact.
       - if: ${{ failure() && steps.diff.outcome == 'failure' }}
         name: Upload Artifact
