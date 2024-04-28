@@ -23,7 +23,7 @@
     "node": ">=20"
   },
   "scripts": {
-    "bundle": "pnpm format:write && pnpm lint && pnpm build",
+    "bundle": "npm run format:write && npm run lint && npm run build",
     "format:write": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint .",

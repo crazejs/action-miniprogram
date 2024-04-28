@@ -30,23 +30,20 @@ jobs:
         id: checkout
         uses: actions/checkout@v4
 
-      - name: Install Node.js
+      - name: Setup Node.js
+        id: setup-node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version-file: .node-version
+          cache: npm
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 8
-          run_install: false
-
-      - name: Install deps
-        run: pnpm install
+      - name: Install Dependencies
+        id: npm-ci
+        run: npm ci
 
       - name: Build dist/ Directory
         id: build
-        run: pnpm bundle
+        run: npm run bundle
 
       # This will fail the workflow if the `dist/` directory is different than
       # expected.
