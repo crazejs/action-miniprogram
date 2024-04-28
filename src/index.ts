@@ -7,7 +7,6 @@ import { uploadWechatMiniProgram } from './wechat';
     const version: string = getInput('version');
     const description: string = getInput('description');
 
-    console.log('[run]', root, version, description);
     await uploadWechatMiniProgram({
       root,
       version,

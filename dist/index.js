@@ -24917,21 +24917,18 @@ exports["default"] = _default;
 /***/ }),
 
 /***/ 1562:
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
 
-// import { join, resolve } from 'node:path';
-// import { existsSync } from 'node:fs';
-// import { cpus } from 'node:os';
-// import { upload, Project } from 'miniprogram-ci';
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.uploadWechatMiniProgram = void 0;
+const node_path_1 = __nccwpck_require__(9411);
 async function uploadWechatMiniProgram({ root, version, description, privateKey }) {
     console.log('[uploadWechatMiniProgram]', root, version, description, privateKey);
-    // const projectPath = join(process.env.GITHUB_WORKSPACE ?? '', root);
-    // const projectConfigPath = join(projectPath, 'project.config.json');
-    // console.log(`[uploadWechatMiniProgram#projectConfigPath]`, projectConfigPath);
+    const projectPath = (0, node_path_1.join)(process.env.GITHUB_WORKSPACE ?? '', root);
+    const projectConfigPath = (0, node_path_1.join)(projectPath, 'project.config.json');
+    console.log(`[uploadWechatMiniProgram#projectConfigPath]`, projectConfigPath);
     //
     // if (!existsSync(projectConfigPath)) {
     //   throw new Error('project.config.json not found');
@@ -25065,6 +25062,14 @@ module.exports = require("net");
 
 "use strict";
 module.exports = require("node:events");
+
+/***/ }),
+
+/***/ 9411:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:path");
 
 /***/ }),
 
@@ -26865,7 +26870,6 @@ const wechat_1 = __nccwpck_require__(1562);
         const root = (0, core_1.getInput)('root');
         const version = (0, core_1.getInput)('version');
         const description = (0, core_1.getInput)('description');
-        console.log('[run]', root, version, description);
         await (0, wechat_1.uploadWechatMiniProgram)({
             root,
             version,

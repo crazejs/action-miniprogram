@@ -1,4 +1,4 @@
-// import { join, resolve } from 'node:path';
+import { join } from 'node:path';
 // import { existsSync } from 'node:fs';
 // import { cpus } from 'node:os';
 // import { upload, Project } from 'miniprogram-ci';
@@ -12,9 +12,9 @@ export interface UploadProps {
 
 export async function uploadWechatMiniProgram({ root, version, description, privateKey }: UploadProps): Promise<void> {
   console.log('[uploadWechatMiniProgram]', root, version, description, privateKey);
-  // const projectPath = join(process.env.GITHUB_WORKSPACE ?? '', root);
-  // const projectConfigPath = join(projectPath, 'project.config.json');
-  // console.log(`[uploadWechatMiniProgram#projectConfigPath]`, projectConfigPath);
+  const projectPath = join(process.env.GITHUB_WORKSPACE ?? '', root);
+  const projectConfigPath = join(projectPath, 'project.config.json');
+  console.log(`[uploadWechatMiniProgram#projectConfigPath]`, projectConfigPath);
   //
   // if (!existsSync(projectConfigPath)) {
   //   throw new Error('project.config.json not found');
