@@ -1,5 +1,5 @@
 import { join } from 'node:path';
-// import { existsSync } from 'node:fs';
+import { existsSync } from 'node:fs';
 // import { cpus } from 'node:os';
 // import { upload, Project } from 'miniprogram-ci';
 
@@ -18,14 +18,14 @@ export async function uploadWechatMiniProgram({ root, version, description, priv
   console.log('[uploadWechatMiniProgram#projectPath]', root);
   const projectConfigPath = join(root, 'project.config.json');
   console.log(`[uploadWechatMiniProgram#projectConfigPath]`, projectConfigPath);
-  //
-  // if (!existsSync(projectConfigPath)) {
-  //   throw new Error('project.config.json not found');
-  // }
-  //
-  // const projectConfig = await import(projectConfigPath);
-  // console.log(`[uploadWechatMiniProgram#projectConfig]`, projectConfig);
-  //
+
+  if (!existsSync(projectConfigPath)) {
+    throw new Error('project.config.json not found');
+  }
+
+  const projectConfig = await import(projectConfigPath);
+  console.log(`[uploadWechatMiniProgram#projectConfig]`, projectConfig);
+
   // const project = new Project({
   //   appid: projectConfig.appid,
   //   type: 'miniProgram',

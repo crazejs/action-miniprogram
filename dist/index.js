@@ -24924,6 +24924,7 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.uploadWechatMiniProgram = void 0;
 const node_path_1 = __nccwpck_require__(9411);
+const node_fs_1 = __nccwpck_require__(7561);
 async function uploadWechatMiniProgram({ root, version, description, privateKey }) {
     console.log('[uploadWechatMiniProgram]', root, version, description, privateKey);
     // const workspace = process.env.GITHUB_WORKSPACE || '';
@@ -24932,14 +24933,11 @@ async function uploadWechatMiniProgram({ root, version, description, privateKey 
     console.log('[uploadWechatMiniProgram#projectPath]', root);
     const projectConfigPath = (0, node_path_1.join)(root, 'project.config.json');
     console.log(`[uploadWechatMiniProgram#projectConfigPath]`, projectConfigPath);
-    //
-    // if (!existsSync(projectConfigPath)) {
-    //   throw new Error('project.config.json not found');
-    // }
-    //
-    // const projectConfig = await import(projectConfigPath);
-    // console.log(`[uploadWechatMiniProgram#projectConfig]`, projectConfig);
-    //
+    if (!(0, node_fs_1.existsSync)(projectConfigPath)) {
+        throw new Error('project.config.json not found');
+    }
+    const projectConfig = await __nccwpck_require__(8891)(projectConfigPath);
+    console.log(`[uploadWechatMiniProgram#projectConfig]`, projectConfig);
     // const project = new Project({
     //   appid: projectConfig.appid,
     //   type: 'miniProgram',
@@ -24961,6 +24959,25 @@ async function uploadWechatMiniProgram({ root, version, description, privateKey 
 }
 exports.uploadWechatMiniProgram = uploadWechatMiniProgram;
 
+
+/***/ }),
+
+/***/ 8891:
+/***/ ((module) => {
+
+function webpackEmptyAsyncContext(req) {
+	// Here Promise.resolve().then() is used instead of new Promise() to prevent
+	// uncaught exception popping up in devtools
+	return Promise.resolve().then(() => {
+		var e = new Error("Cannot find module '" + req + "'");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	});
+}
+webpackEmptyAsyncContext.keys = () => ([]);
+webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
+webpackEmptyAsyncContext.id = 8891;
+module.exports = webpackEmptyAsyncContext;
 
 /***/ }),
 
@@ -25065,6 +25082,14 @@ module.exports = require("net");
 
 "use strict";
 module.exports = require("node:events");
+
+/***/ }),
+
+/***/ 7561:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:fs");
 
 /***/ }),
 
@@ -26854,6 +26879,11 @@ module.exports = parseParams
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__nccwpck_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/compat */
 /******/ 	
 /******/ 	if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = __dirname + "/";
