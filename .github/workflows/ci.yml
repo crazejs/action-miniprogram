@@ -59,10 +59,6 @@ jobs:
         env:
           WECHAT_MINI_PROGRAM_PRIVATE_KEY: ${{ secrets.WECHAT_MINI_PROGRAM_PRIVATE_KEY }}
 
-      - name: Print Output
-        id: output
-        run: echo "${{ steps.test-action.outputs.version }}"
-
   release:
     name: Release
     runs-on: ubuntu-latest
