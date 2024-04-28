@@ -18,6 +18,7 @@ jobs:
 
     steps:
       - name: Checkout
+        id: checkout
         uses: actions/checkout@v4
 
       - name: Setup Node.js
@@ -52,8 +53,8 @@ jobs:
         id: test-action
         uses: ./
         with:
-          root: miniprogram/wechat
-          version: 1.0.0
-          description: test
-        env:
-          WECHAT_MINI_PROGRAM_PRIVATE_KEY: ${{ secrets.WECHAT_MINI_PROGRAM_PRIVATE_KEY }}
+          milliseconds: 2000
+
+      - name: Print Output
+        id: output
+        run: echo "${{ steps.test-action.outputs.time }}"
