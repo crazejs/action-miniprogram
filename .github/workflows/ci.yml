@@ -21,20 +21,19 @@ jobs:
         id: checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        id: setup-node
+      - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version-file: .node-version
-          cache: npm
+          node-version: 20
 
-      - name: Install Dependencies
-        id: npm-ci
-        run: npm ci
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8
+          run_install: true
 
       - name: Lint
-        id: npm-lint
-        run: npm run lint
+        run: pnpm lint
 
   test-action:
     name: GitHub Actions Test

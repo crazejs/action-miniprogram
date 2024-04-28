@@ -23,10 +23,10 @@
     "node": ">=20"
   },
   "scripts": {
-    "bundle": "npm run lint && npm run build",
+    "bundle": "pnpm lint && pnpm build",
     "lint": "eslint .",
     "build": "ncc build src/index.ts -o dist --source-map --license licenses.txt",
-    "start": "npm run build -- --watch",
+    "start": "pnpm build -- --watch",
     "prepare": "husky || true",
     "release": "semantic-release"
   },
