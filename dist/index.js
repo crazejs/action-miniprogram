@@ -27737,7 +27737,6 @@ const wechat_1 = __nccwpck_require__(1562);
             description,
             privateKey: process.env.WECHAT_MINI_PROGRAM_PRIVATE_KEY ?? '',
         });
-        (0, core_1.setOutput)('version', version);
     }
     catch (error) {
         if (error instanceof Error) {

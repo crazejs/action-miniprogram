@@ -1,6 +1,5 @@
 name: 'MiniProgram'
 description: 'A GitHub Action to build MiniProgram.'
-author: 'Anguer'
 
 branding:
   icon: 'package'
@@ -19,10 +18,6 @@ inputs:
     description: 'Description of your MiniProgram'
     required: false
     default: 'MiniProgram'
-
-outputs:
-  version:
-    description: 'Version of your MiniProgram'
 
 runs:
   using: node20

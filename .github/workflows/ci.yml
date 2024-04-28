@@ -53,7 +53,7 @@ jobs:
         id: test-action
         uses: ./
         with:
-          root: ./miniprogram/wechat
+          root: miniprogram/wechat
           version: 1.0.0
           description: test
         env:

@@ -23,12 +23,12 @@
     "node": ">=20"
   },
   "scripts": {
-    "bundle": "pnpm format:write && pnpm lint && pnpm package",
+    "bundle": "pnpm format:write && pnpm lint && pnpm build",
     "format:write": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint .",
-    "package": "npx ncc build src/index.ts -o dist --source-map --license licenses.txt",
-    "package:watch": "npm run package -- --watch",
+    "build": "ncc build src/index.ts -o dist --source-map --license licenses.txt",
+    "start": "npm run build -- --watch",
     "prepare": "husky || true",
     "release": "semantic-release"
   },

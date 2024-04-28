@@ -1,4 +1,4 @@
-import { getInput, setOutput, setFailed } from '@actions/core';
+import { getInput, setFailed } from '@actions/core';
 import { uploadWechatMiniProgram } from './wechat';
 
 (async function run(): Promise<void> {
@@ -13,8 +13,6 @@ import { uploadWechatMiniProgram } from './wechat';
       description,
       privateKey: process.env.WECHAT_MINI_PROGRAM_PRIVATE_KEY ?? '',
     });
-
-    setOutput('version', version);
   } catch (error) {
     if (error instanceof Error) {
       setFailed(error.message);
