@@ -56,6 +56,8 @@ jobs:
           root: .
           version: 1.0.0
           description: test
+        env:
+          WECHAT_MINI_PROGRAM_PRIVATE_KEY: ${{ secrets.WECHAT_MINI_PROGRAM_PRIVATE_KEY }}
 
       - name: Print Output
         id: output
@@ -66,7 +68,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      issues: writ
+      issues: write
       pull-requests: write
       id-token: write
     steps:
