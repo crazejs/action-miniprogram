@@ -1,5 +1,5 @@
 import { join } from 'node:path';
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 // import { cpus } from 'node:os';
 // import { upload, Project } from 'miniprogram-ci';
 
@@ -23,7 +23,7 @@ export async function uploadWechatMiniProgram({ root, version, description, priv
     throw new Error('project.config.json not found');
   }
 
-  const projectConfig = await import(projectConfigPath);
+  const projectConfig = readFileSync(projectConfigPath, 'utf8');
   console.log(`[uploadWechatMiniProgram#projectConfig]`, projectConfig);
 
   // const project = new Project({

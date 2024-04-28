@@ -24936,7 +24936,7 @@ async function uploadWechatMiniProgram({ root, version, description, privateKey 
     if (!(0, node_fs_1.existsSync)(projectConfigPath)) {
         throw new Error('project.config.json not found');
     }
-    const projectConfig = await __nccwpck_require__(8891)(projectConfigPath);
+    const projectConfig = (0, node_fs_1.readFileSync)(projectConfigPath, 'utf8');
     console.log(`[uploadWechatMiniProgram#projectConfig]`, projectConfig);
     // const project = new Project({
     //   appid: projectConfig.appid,
@@ -24959,25 +24959,6 @@ async function uploadWechatMiniProgram({ root, version, description, privateKey 
 }
 exports.uploadWechatMiniProgram = uploadWechatMiniProgram;
 
-
-/***/ }),
-
-/***/ 8891:
-/***/ ((module) => {
-
-function webpackEmptyAsyncContext(req) {
-	// Here Promise.resolve().then() is used instead of new Promise() to prevent
-	// uncaught exception popping up in devtools
-	return Promise.resolve().then(() => {
-		var e = new Error("Cannot find module '" + req + "'");
-		e.code = 'MODULE_NOT_FOUND';
-		throw e;
-	});
-}
-webpackEmptyAsyncContext.keys = () => ([]);
-webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 8891;
-module.exports = webpackEmptyAsyncContext;
 
 /***/ }),
 
@@ -26879,11 +26860,6 @@ module.exports = parseParams
 /******/ 	}
 /******/ 	
 /************************************************************************/
-/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	(() => {
-/******/ 		__nccwpck_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/compat */
 /******/ 	
 /******/ 	if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = __dirname + "/";
