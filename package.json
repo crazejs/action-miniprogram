@@ -27,6 +27,7 @@
     "lint": "eslint . --fix",
     "build": "ncc build src/index.ts -o dist --source-map --license licenses.txt",
     "start": "pnpm build -- --watch",
+    "test": "node -r ts-node/register --env-file=.env src/test.ts",
     "prepare": "husky || true",
     "release": "semantic-release"
   },
@@ -52,6 +53,7 @@
     "prettier": "^3",
     "prettier-eslint": "^16",
     "semantic-release": "^21",
+    "ts-node": "^10",
     "typescript": "^5"
   }
 }

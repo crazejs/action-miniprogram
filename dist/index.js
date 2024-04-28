@@ -25728,7 +25728,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.uploadWechatMiniProgram = void 0;
 const node_path_1 = __nccwpck_require__(9411);
 const node_fs_1 = __nccwpck_require__(7561);
-// import { cpus } from 'node:os';
+const node_os_1 = __nccwpck_require__(612);
 const miniprogram_ci_1 = __nccwpck_require__(7655);
 async function uploadWechatMiniProgram({ root, version, description, privateKey }) {
     console.log('[uploadWechatMiniProgram]', root, version, description, privateKey);
@@ -25752,16 +25752,23 @@ async function uploadWechatMiniProgram({ root, version, description, privateKey 
         ignores: ['node_modules/**/*'],
     });
     console.log(`[uploadWechatMiniProgram#project]`, project);
-    // await upload({
-    //   project,
-    //   version,
-    //   desc: description,
-    //   allowIgnoreUnusedFiles: projectConfig.ignoreUploadUnusedFiles,
-    //   setting: projectConfig.setting,
-    //   robot: 24,
-    //   threads: cpus().length * 2,
-    //   onProgressUpdate: console.log,
-    // });
+    try {
+        const result = await (0, miniprogram_ci_1.upload)({
+            project,
+            version,
+            desc: description,
+            allowIgnoreUnusedFiles: projectConfig.ignoreUploadUnusedFiles,
+            setting: projectConfig.setting,
+            robot: 24,
+            threads: (0, node_os_1.cpus)().length * 2,
+            onProgressUpdate: console.log,
+        });
+        console.log(`[uploadWechatMiniProgram#upload]`, result);
+    }
+    catch (e) {
+        console.error('[uploadWechatMiniProgram#upload]', e);
+        throw new Error('Upload failed');
+    }
 }
 exports.uploadWechatMiniProgram = uploadWechatMiniProgram;
 
@@ -25877,6 +25884,14 @@ module.exports = require("node:events");
 
 "use strict";
 module.exports = require("node:fs");
+
+/***/ }),
+
+/***/ 612:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:os");
 
 /***/ }),
 
