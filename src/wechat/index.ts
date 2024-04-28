@@ -1,7 +1,7 @@
 import { join, resolve } from 'node:path';
 import { existsSync, readFileSync } from 'node:fs';
-import { cpus } from 'node:os';
-import { upload, Project } from 'miniprogram-ci';
+// import { cpus } from 'node:os';
+// import { upload, Project } from 'miniprogram-ci';
 
 export interface UploadProps {
   root: string;
@@ -27,22 +27,22 @@ export async function uploadWechatMiniProgram({ root, version, description, priv
   const projectPath = resolve(root, projectConfig.miniprogramRoot ?? '');
   console.log(`[uploadWechatMiniProgram#projectPath]`, projectPath);
 
-  const project = new Project({
-    appid: projectConfig.appid,
-    type: 'miniProgram',
-    projectPath,
-    privateKey,
-    ignores: ['node_modules/**/*'],
-  });
-
-  await upload({
-    project,
-    version,
-    desc: description,
-    allowIgnoreUnusedFiles: projectConfig.ignoreUploadUnusedFiles,
-    setting: projectConfig.setting,
-    robot: 24,
-    threads: cpus().length * 2,
-    onProgressUpdate: console.log,
-  });
+  // const project = new Project({
+  //   appid: projectConfig.appid,
+  //   type: 'miniProgram',
+  //   projectPath,
+  //   privateKey,
+  //   ignores: ['node_modules/**/*'],
+  // });
+  //
+  // await upload({
+  //   project,
+  //   version,
+  //   desc: description,
+  //   allowIgnoreUnusedFiles: projectConfig.ignoreUploadUnusedFiles,
+  //   setting: projectConfig.setting,
+  //   robot: 24,
+  //   threads: cpus().length * 2,
+  //   onProgressUpdate: console.log,
+  // });
 }
