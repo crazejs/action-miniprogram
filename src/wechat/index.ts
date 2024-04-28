@@ -1,7 +1,7 @@
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
 import { existsSync, readFileSync } from 'node:fs';
-// import { cpus } from 'node:os';
-// import { upload, Project } from 'miniprogram-ci';
+import { cpus } from 'node:os';
+import { upload, Project } from 'miniprogram-ci';
 
 export interface UploadProps {
   root: string;
@@ -14,7 +14,6 @@ export async function uploadWechatMiniProgram({ root, version, description, priv
   console.log('[uploadWechatMiniProgram]', root, version, description, privateKey);
   // const workspace = process.env.GITHUB_WORKSPACE || '';
   // console.log('[uploadWechatMiniProgram#workspace]', workspace);
-  // const projectPath = join(workspace, root);
   console.log('[uploadWechatMiniProgram#projectPath]', root);
   const projectConfigPath = join(root, 'project.config.json');
   console.log(`[uploadWechatMiniProgram#projectConfigPath]`, projectConfigPath);
@@ -23,25 +22,27 @@ export async function uploadWechatMiniProgram({ root, version, description, priv
     throw new Error('project.config.json not found');
   }
 
-  const projectConfig = readFileSync(projectConfigPath, 'utf8');
+  const projectConfig = JSON.parse(readFileSync(projectConfigPath, 'utf8'));
   console.log(`[uploadWechatMiniProgram#projectConfig]`, projectConfig);
+  const projectPath = resolve(root, projectConfig.miniprogramRoot ?? '');
+  console.log(`[uploadWechatMiniProgram#projectPath]`, projectPath);
 
-  // const project = new Project({
-  //   appid: projectConfig.appid,
-  //   type: 'miniProgram',
-  //   projectPath: resolve(projectPath, projectConfig.miniprogramRoot ?? ''),
-  //   privateKey,
-  //   ignores: ['node_modules/**/*'],
-  // });
-  //
-  // await upload({
-  //   project,
-  //   version,
-  //   desc: description,
-  //   allowIgnoreUnusedFiles: projectConfig.ignoreUploadUnusedFiles,
-  //   setting: projectConfig.setting,
-  //   robot: 24,
-  //   threads: cpus().length * 2,
-  //   onProgressUpdate: console.log,
-  // });
+  const project = new Project({
+    appid: projectConfig.appid,
+    type: 'miniProgram',
+    projectPath,
+    privateKey,
+    ignores: ['node_modules/**/*'],
+  });
+
+  await upload({
+    project,
+    version,
+    desc: description,
+    allowIgnoreUnusedFiles: projectConfig.ignoreUploadUnusedFiles,
+    setting: projectConfig.setting,
+    robot: 24,
+    threads: cpus().length * 2,
+    onProgressUpdate: console.log,
+  });
 }
