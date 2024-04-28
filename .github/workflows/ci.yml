@@ -51,9 +51,9 @@ jobs:
 
       - name: Test Local Action
         id: test-action
-        uses: ./miniprogram/wechat
+        uses: ./
         with:
-          root: .
+          root: ./miniprogram/wechat
           version: 1.0.0
           description: test
         env:
